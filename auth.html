@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Login / Signup | iMart.com</title>
+  <style>
+    body {
+      background: #f5f7fa;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: Arial, sans-serif;
+      margin: 0;
+    }
+    .auth-box {
+      background: #fff;
+      padding: 32px 28px;
+      border-radius: 12px;
+      box-shadow: 0 4px 24px rgba(126,131,214,0.10);
+      width: 320px;
+      text-align: center;
+    }
+    .auth-box h2 {
+      margin-bottom: 18px;
+      color: #007bff;
+    }
+    .auth-box input {
+      width: 90%;
+      padding: 10px;
+      margin: 8px 0;
+      border: 1.5px solid #7e83d6;
+      border-radius: 8px;
+      font-size: 1em;
+      background: #f7f8fa;
+    }
+    .auth-box button {
+      width: 100%;
+      padding: 12px 0;
+      margin-top: 12px;
+      border: none;
+      border-radius: 22px;
+      background: linear-gradient(90deg, #007bff 60%, #7e83d6 100%);
+      color: #fff;
+      font-size: 1.1em;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.15s;
+    }
+    .auth-box button:hover {
+      background: linear-gradient(90deg, #0056b3 60%, #5a5fcf 100%);
+      transform: translateY(-2px) scale(1.03);
+    }
+    .toggle-link {
+      color: #007bff;
+      cursor: pointer;
+      text-decoration: underline;
+      font-size: 0.98em;
+      margin-top: 10px;
+      display: inline-block;
+    }
+    .error {
+      color: #d32f2f;
+      font-size: 0.98em;
+      margin-top: 8px;
+    }
+  </style>
+</head>
+<body>
+  <div class="auth-box">
+    <h2 id="formTitle">Sign In</h2>
+    <form id="authForm">
+      <div style="position:relative; margin: 0 auto;">
+  <input type="email" id="email" placeholder="Email" required autocomplete="email" style="width: 98%; padding-right:10px; padding-left: 1px;">
+</div>
+<div style="position:relative; margin: 0 auto;">
+  <input type="password" id="password" placeholder="Password" required autocomplete="current-password" style="width:83%; padding-right:50px; padding-left: 10px;">
+  <span id="togglePassword" style="position:absolute; right:10px; top:50%; transform:translateY(-50%); cursor:pointer;">
+    <!-- Eye SVG (visible by default) -->
+    <svg id="eyeOpen" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="#888" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:inline;" viewBox="0 0 24 24">
+      <ellipse cx="12" cy="12" rx="8" ry="5"/>
+      <circle cx="12" cy="12" r="2"/>
+    </svg>
+    <!-- Eye-slash SVG (hidden by default) -->
+    <svg id="eyeClosed" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="#888" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none;" viewBox="0 0 24 24">
+      <ellipse cx="12" cy="12" rx="8" ry="5"/>
+      <circle cx="12" cy="12" r="2"/>
+      <line x1="4" y1="20" x2="20" y2="4"/>
+    </svg>
+  </span>
+</div>
+      <br>
+      <button type="submit" id="authBtn">Sign In</button>
+      <div class="error" id="authError"></div>
+    </form>
+    <span class="toggle-link" id="toggleAuth">Don't have an account? Sign Up</span>
+  </div>
+
+  <script>
+  document.addEventListener('DOMContentLoaded', function() {
+    // Redirect if already logged in
+    if (localStorage.getItem('imart_logged_in') === 'true') {
+      window.location.href = "website.html";
+    }
+
+    const authForm = document.getElementById('authForm');
+    const toggleAuth = document.getElementById('toggleAuth');
+    const formTitle = document.getElementById('formTitle');
+    const authBtn = document.getElementById('authBtn');
+    const authError = document.getElementById('authError');
+    let isSignUp = false;
+
+    toggleAuth.onclick = function() {
+      isSignUp = !isSignUp;
+      formTitle.textContent = isSignUp ? "Sign Up" : "Sign In";
+      authBtn.textContent = isSignUp ? "Sign Up" : "Sign In";
+      toggleAuth.textContent = isSignUp ? "Already have an account? Sign In" : "Don't have an account? Sign Up";
+      authError.textContent = "";
+    };
+
+    authForm.onsubmit = function(e) {
+      e.preventDefault();
+      const email = document.getElementById('email').value.trim().toLowerCase();
+      const password = document.getElementById('password').value;
+
+      // Basic email format validation
+      const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailPattern.test(email)) {
+        authError.textContent = "Please enter a valid email address.";
+        return;
+      }
+
+      if (isSignUp) {
+        // Sign Up
+        if (localStorage.getItem('imart_user_' + email)) {
+          authError.textContent = "Email already registered.";
+          return;
+        }
+        localStorage.setItem('imart_user_' + email, password);
+        localStorage.setItem('imart_logged_in', 'true');
+        localStorage.setItem('imart_current_user', email);
+        window.location.href = "website.html";
+      } else {
+        // Sign In
+        const stored = localStorage.getItem('imart_user_' + email);
+        if (!stored || stored !== password) {
+          authError.textContent = "Invalid email or password.";
+          return;
+        }
+        localStorage.setItem('imart_logged_in', 'true');
+        localStorage.setItem('imart_current_user', email);
+        window.location.href = "website.html";
+      }
+    };
+
+    // Eye icon toggle
+    const passwordInput = document.getElementById('password');
+    const togglePassword = document.getElementById('togglePassword');
+    const eyeOpen = document.getElementById('eyeOpen');
+    const eyeClosed = document.getElementById('eyeClosed');
+
+    togglePassword.onclick = function() {
+      const isHidden = passwordInput.type === 'password';
+      passwordInput.type = isHidden ? 'text' : 'password';
+      eyeOpen.style.display = isHidden ? 'none' : 'inline';
+      eyeClosed.style.display = isHidden ? 'inline' : 'none';
+    };
+  });
+  </script>
+</body>
+</html>

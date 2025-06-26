@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html> 
+    <head>
+        <title> iMart.com</title> 
+        <link rel="icon" type="image/jpg" href="logoo.png" style="width: 16px; height: 16px;" >
+    <link rel="stylesheet" href="style.css">
+      </head> 
+    <body style="background-color: #F9F9F9;"> 
+       <script>
+  if (localStorage.getItem('imart_logged_in') !== 'true') {
+    window.location.href = "auth.html";
+  }
+</script>
+      <header class="header">
+  <img src="reallogo.png" alt="Logo">
+  <div class="header-actions">
+<form id="searchForm" onsubmit="searchProducts(); return false;" style="flex: 1;">
+      <div class="search-bar-row">
+        <span class="search-icon">&#128269;</span>
+        <input type="text" id="searchBar" placeholder="Search for Books...">
+      
+        <button type="submit">Search</button>
+      </div>
+    </form>
+    
+    <button class="sign-in-btn" onclick="logout()">Sign Out</button>
+    <button class="cart-btn" onclick="alert('Cart clicked!')">🛒</button>
+  </div>
+</header>
+<style>
+/* Header container */
+.header {
+  background: linear-gradient(90deg, #7e83d6 60%, #007bff 100%);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 32px 48px;
+  box-shadow: 0 4px 24px rgba(126,131,214,0.10);
+}
+
+/* Logo styling */
+.header img {
+  height: 80px;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+}
+
+/* Header right section */
+.header .header-actions {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  flex: 1;
+}
+
+#searchForm {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Search bar container */
+.search-bar-row {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  max-width: 700px; /* or whatever width you want */
+  background: #fff;
+  border: 2px solid #7e83d6;
+  border-radius: 30px;
+  box-shadow: 0 2px 8px rgba(126,131,214,0.08);
+  transition: border 0.2s, box-shadow 0.2s;
+  padding: 4px 8px;
+  margin: 0 auto;
+}
+
+.search-bar-row:focus-within {
+  border: 2px solid #007bff;
+  box-shadow: 0 4px 16px rgba(0,123,255,0.10);
+}
+
+.search-bar-row .search-icon {
+  font-size: 22px;
+  color: #7e83d6;
+  margin-right: 8px;
+}
+
+#searchBar {
+  border: none;
+  outline: none;
+  height: 40px;
+  font-size: 18px;
+  background: transparent;
+  flex: 1;
+  padding: 0 8px;
+  color: #222;
+  min-width: 0;
+}
+
+button[type="submit"] {
+  height: 40px;
+  font-size: 18px;
+  background: linear-gradient(90deg, #007bff 60%, #7e83d6 100%);
+  color: #fff;
+  border: none;
+  border-radius: 22px;
+  cursor: pointer;
+  font-weight: bold;
+  padding: 0 32px;
+  margin-left: 8px;
+  box-shadow: 0 2px 8px rgba(0,123,255,0.10);
+  transition: background 0.2s, transform 0.15s;
+  flex-shrink: 0;
+}
+button[type="submit"]:hover {
+  background: linear-gradient(90deg, #0056b3 60%, #5a5fcf 100%);
+  transform: translateY(-2px) scale(1.04);
+}
+
+/* Sign In Button */
+.sign-in-btn {
+  border-radius: 22px;
+  font-size: 20px;
+  background: linear-gradient(90deg, #ffe259 0%, #ffa751 100%);
+  color: #222;
+  border: none;
+  padding: 0 28px;
+  height: 44px;
+  font-weight: bold;
+  box-shadow: 0 2px 8px rgba(255, 174, 81, 0.10);
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s, transform 0.15s;
+}
+.sign-in-btn:hover {
+  background: linear-gradient(90deg, #ffa751 0%, #ffe259 100%);
+  color: #007bff;
+  transform: translateY(-2px) scale(1.04);
+}
+
+/* Cart Button */
+.cart-btn {
+  font-size: 22px;
+  background: linear-gradient(90deg, #ff5858 0%, #f09819 100%);
+  border-radius: 50%;
+  color: #fff;
+  border: none;
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 8px rgba(255, 88, 88, 0.10);
+  cursor: pointer;
+  transition: background 0.2s, transform 0.15s;
+}
+.cart-btn:hover {
+  background: linear-gradient(90deg, #f09819 0%, #ff5858 100%);
+  transform: scale(1.08) rotate(-8deg);
+}
+</style>
+<!-- ...existing code... --> 
+    
+    
+ </header>
+                
+                  
+                </div>
+                <main>
+  <style>
+.product-list {
+  display: grid;
+  grid-template-columns:repeat(4,1fr); ;
+  gap: 90px 70px;
+  
+  justify-content: space-between;
+  padding: 24px 25px;
+  margin-top: -10px; /* Add space below header */
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.product-card {
+  width: 300px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background: #fff;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+  padding: 0px;
+  text-align: center;
+}
+.product-card img {
+  width: 100%;
+  height: 320px;
+  object-fit: cover;
+  border-radius: 10px;
+  margin-bottom: 16px;
+}
+.product-title {
+  font-size: 1.1em;
+  margin: 10px 0 6px 0;
+  font-weight: bold;
+}
+.product-desc {
+  font-size: 0.95em;
+  color: #555;
+  margin-bottom: 8px;
+}
+.product-price {
+  font-size: 1.1em;
+  color: #007bff;
+  font-weight: bold;
+  margin-bottom: 8px;
+}
+
+.contact-buttons {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+}
+.contact-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  border: none;
+  border-radius: 50%;
+  background: #eee;
+  font-size: 20px;
+  text-decoration: none;
+  color: #333;
+  transition: background 0.2s;
+}
+.contact-btn:hover {
+  background: #ccc;
+}
+
+
+
+</style>
+<!-- Add this container around your heading and product list -->
+<div class="product-list-container">
+  <h2 class="section-title" id="popular-heading" style="margin-bottom: 7px;">Popular books</h2>
+  <div class="product-list">
+    <!-- ...your product cards... -->
+  </div>
+ </div>
+ <div class="product-list">
+  <a href="form.html?title=The Millionaire Fastlane" class="product-card">
+    <img src="images (6).jpeg" alt="Product 1">
+    <div class="product-title">The Millionaire Fastlane</div>
+    <div class="product-desc">Author: MJ Demarco .</div>
+    <div class="product-price">ETB 1000</div>
+  </a>
+  <a href="form.html?title=The 48 Laws of Power" class="product-card">
+    <img src="images (7).jpeg" alt="Product 1">
+    <div class="product-title">The 48 Laws of Power</div>
+    <div class="product-desc">Author: Robert Greene.</div>
+    <div class="product-price">ETB 650</div>
+  </a>
+  <a href="form.html?title=The Art of Seduction" class="product-card">
+    <img src="images (8).jpeg" alt="Product 1">
+    <div class="product-title">The Art of War</div>
+    <div class="product-desc">Author: Sun Tzu.</div>
+    <div class="product-price">ETB 1200</div>
+  </a>
+  <a href="form.html?title=Atomic Habits" class="product-card">
+    <img src="images (9).jpeg" alt="Product 2">
+    <div class="product-title">Atomic Habits</div>
+    <div class="product-desc">Author: James Clear.</div>
+    <div class="product-price">ETB 500</div>
+  </a>
+  <a href="form.html?title=The Psychology of Money" class="product-card">
+    <img src="images (10).jpeg" alt="Product 3">
+    <div class="product-title">The Psychology of Money</div>
+    <div class="product-desc">Author: Morgan Housel.</div>
+    <div class="product-price">ETB 500</div>
+  </a>
+  <a href="form.html?title=Rich Dad Poor Dad" class="product-card">
+    <img src="images (11).jpeg" alt="Product 4">
+    <div class="product-title">Rich Dad Poor Dad</div>
+    <div class="product-desc">Author: Robert Kiyosaki.</div>
+    <div class="product-price">ETB 450</div>
+  </a>
+  <a href="form.html?title=The Art of Seduction" class="product-card">
+    <img src="images (12).jpeg" alt="Product 4">
+    <div class="product-title">The Art of Seduction</div>
+    <div class="product-desc">Author: Robert Greene.</div>
+    <div class="product-price">ETB 750</div>
+  </a>
+  <a href="form.html?title=Think and Grow Rich" class="product-card">
+    <img src="images (13).jpeg" alt="Product 5">
+    <div class="product-title">Think and Grow Rich</div>
+    <div class="product-desc">Author: Napoleon Hill.</div>
+    <div class="product-price">ETB 450</div>
+  </a>
+  
+ </div>
+    
+
+ <div class="product-list-container">
+  <h2 class="section-title" id="new-arrivals-heading" style="margin-bottom: 14px;">New Arrival Books</h2>
+  <div class="product-list">
+
+    <a href="form.html?title=The Lean Startup" class="product-card"> 
+    <img src="images (14).jpeg" alt="Product 5">
+    <div class="product-title">The Lean Startup</div>
+    <div class="product-desc">Author: Eric Ries.</div>
+    <div class="product-price">ETB 600</div>
+  </a>
+  <a href="form.html?title=The Blue Ocean Strategy" class="product-card">
+    <img src="images (15).jpeg" alt="Product 4">
+    <div class="product-title">The Blue Ocean Strategy</div>
+    <div class="product-desc">Author: W.Chan Kim.</div>
+    <div class="product-price">ETB 600</div>
+  </a>
+    <a href="form.html?title=Zero to One" class="product-card">
+    <img src="images (16).jpeg" alt="Product 2">
+    <div class="product-title">Zero to One</div>
+    <div class="product-desc">Author: Peter Thiel.</div>
+    <div class="product-price">ETB 550</div>
+  </a>
+  <a href="form.html?title=The Intelligent Investor" class="product-card">
+    <img src="images (17).jpeg" alt="Product 3">
+    <div class="product-title">The Intelligent Investor</div>
+    <div class="product-desc">Author: Benjamin Graham.</div>
+    <div class="product-price">ETB 1500</div>
+  </a>
+    <a href="form.html?title=The Millionaire Next Door" class="product-card">
+    <img src="images (18).jpeg" alt="Product 1">
+    <div class="product-title">The Millionaire Next Door</div>
+    <div class="product-desc">Author: Thomas J.Minnley .</div>
+    <div class="product-price">ETB 1300</div>
+  </a>
+ <a href="form.html?title=The Laws of Human Nature" class="product-card">
+    <img src="images (19).jpeg" alt="Product 5">
+    <div class="product-title">The Laws of Human Nature</div>
+    <div class="product-desc">Author: Robert Greene.</div>
+    <div class="product-price">ETB 650</div>
+  </a>
+   <a href="form.html?title=The Subtle Art of Not Giving a F*ck" class="product-card">
+    <img src="books-subtle-art.png" alt="Product 1">
+    <div class="product-title">The Subtle Art of Not Giving a F*ck</div>
+    <div class="product-desc">Author: Mark Manson.</div>
+    <div class="product-price">ETB 630</div>
+  </a>
+  <a href="form.html?title=The Cashflow Quadrant" class="product-card">
+    <img src="1.jpg" alt="Product 1">
+    <div class="product-title">The Cashflow Quadrant</div>
+    <div class="product-desc">Author: Robert Kiyosaki.</div>
+    <div class="product-price">ETB 550</div>
+  </a>
+
+  </div>
+
+<div class="product-list-container">
+  <h2 class="section-title" id="new-arrivals-heading" style="margin-bottom: 14px;">Available Books (In Stock)</h2>
+  <div class="product-list">
+    <a href="form.html?title=The 33 Strategies of War" class="product-card">
+      <img src="images (21).jpeg" alt="Product 5">
+      <div class="product-title">The 33 Strategies of War</div>
+      <div class="product-desc">Author: Robert Greene.</div>
+      <div class="product-price">ETB 700</div>
+    </a>
+  </div>
+</div>
+
+  
+    
+</div>
+<!-- Add this for search results display -->
+<div id="search-results" class="product-list" style="display:none;"></div>
+</main>
+<hr> 
+
+<div style="background-color: #2c2c2c;">
+<footer style="text-align: center;"><br>
+  <!-- Place this inside your <footer> before the contact buttons and copyright -->
+<div class="footer-nav">
+  <a href="#contact">Contact Us</a>
+  <a href="#about">About Us</a>
+  <a href="#privacy">Privacy Policy</a>
+  <a href="#terms">Terms of Service</a>
+</div>
+
+<style>
+.footer-nav {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 50px 40px; /* row gap, column gap */
+  justify-content: center;
+  align-items: center;
+  max-width: 400px;
+  margin: 30px auto 20px auto;
+}
+.footer-nav a {
+  color: #fff;
+  text-decoration: none;
+  font-size: 1.1em;
+  background: #444;
+  padding: 10px 0;
+  border-radius: 6px;
+  text-align: center;
+  transition: background 0.2s;
+  display: block;
+}
+.footer-nav a:hover {
+  background: #007bff;
+}
+</style>
+
+  <script>
+function searchProducts() {
+  const query = document.getElementById('searchBar').value.trim().toLowerCase();
+  const allSections = document.querySelectorAll('.product-list-container');
+  const allLists = document.querySelectorAll('.product-list');
+  const allCards = document.querySelectorAll('.product-card');
+  const allHeadings = document.querySelectorAll('.section-title');
+  const searchResults = document.getElementById('search-results');
+
+  // Store original parent for each card (only once)
+  if (!window._originalParents) {
+    window._originalParents = [];
+    allCards.forEach(card => {
+      window._originalParents.push({
+        card: card,
+        parent: card.parentNode
+      });
+    });
+  }
+
+  if (query === "") {
+    // Restore all cards to their original parents
+    window._originalParents.forEach(obj => {
+      if (!obj.card.parentNode.isSameNode(obj.parent)) {
+        obj.parent.appendChild(obj.card);
+      }
+    });
+    // Show all sections and headings, hide search results
+    allSections.forEach(section => section.style.display = "");
+    allLists.forEach(list => list.style.display = "");
+    allCards.forEach(card => card.style.display = "");
+    allHeadings.forEach(h => h.style.display = "");
+    searchResults.style.display = "none";
+    return;
+  }
+
+  // Hide all sections and headings
+  allSections.forEach(section => section.style.display = "none");
+  allHeadings.forEach(h => h.style.display = "none");
+
+  // Clear search results grid
+  searchResults.innerHTML = "";
+  searchResults.style.display = "";
+
+  // Move matching cards to search results grid
+  let found = false;
+  allCards.forEach(card => {
+    const title = card.querySelector('.product-title')?.textContent.toLowerCase() || "";
+    const desc = card.querySelector('.product-desc')?.textContent.toLowerCase() || "";
+    if (title.includes(query) || desc.includes(query)) {
+      searchResults.appendChild(card);
+      card.style.display = "";
+      found = true;
+    } else {
+      card.style.display = "none";
+    }
+  });
+
+  // If no results, hide searchResults grid
+  if (!found) {
+    searchResults.style.display = "none";
+  }
+}
+</script>
+
+
+  <div class="contact-buttons">
+    <a href="tel:+25 1901254400" class="contact-btn" title="Phone">📞</a>
+    <a href="mailto:kalebmarkos1@gmail.com" class="contact-btn" title="Email">✉️</a>
+    <a href="https://x.com/yourprofile" class="contact-btn" title="X (Twitter)" target="_blank">𝕏</a>
+    <a href="https://instagram.com/alphamann2025" class="contact-btn" title="Instagram" target="_blank">📸</a>
+  </div>
+  <p style="color: white;">&copy; 2025 iMart.com All rights reserved.</p>
+
+
+
+
+
+</footer>
+
+</div>
+<script src="web.js"></script>
+</body>
+
+            
+        
+        
+
+
+
+  
+  
+  
+  
+  
+  
+  
+ 
+ 
+ 
+ 
+ 
+ 
+  
+ 
+
+
+    </body>
+        
+
+
+</html>

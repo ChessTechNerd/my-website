@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html>
+<head>
+   <link rel="icon" type="image/jpg" href="bmw.jpg.jpg">
+    <title>My Web Page</title>
+</head>
+<body>
+    <form actiom="index.php" method="post">
+         <label for="username">Userame:</label>
+         <input type="text" id="username" name="username" required placeholder="Enter your username"><br><br>
+
+         <label for="password">Password:</label>
+         <input type="password" id="password" required minlength="5" maxlength="8" placeholder="Enter your password"><br><br>
+    
+         <label for="email">Email:</label>
+         <input type="email" id="email"  required placeholder="elonmusk12@gmail.com"><br><br>
+        
+         <label for="phone">Phone:</label>
+         <input type="tel" id="phone"  required placeholder="0901010101" pattern="+251-9[0-9]{2}-[0-9]{3}-[0-9]{3}"><br><br>
+        
+         <label for="bday">Birthday:</label>
+         <input type="date" id="bday"  required><br><br>
+        
+         <label for="quantity">Quantity:</label>
+         <input type="number" id="quantity" name="quantity" min="0" max="99" required placeholder="Enter quantity" value="1"><br><br>
+        
+        <label for="title">Title:</label>
+        
+        <label for="mr.">Mr.</label>
+        <input type="radio" id="mr." name="title" value="Mr." required>
+        <label for="mrs.">Mrs.</label>
+        <input type="radio" id="mrs." name="title" value="Mrs.">
+        <label for="Dr.">Dr.</label>
+        <input type="radio" id="Dr" name="title" value="Dr"><br><br>
+        
+        <label for="payment">Payment Method:</label>
+        <select id="payment" name="payment" required>
+            <option value="visa_card">Visa Card</option>
+            <option value="paypal">PayPal</option>
+            <option value="master_card">Master Card</option>
+        </select><br><br>
+
+        <label for="subscribe">Subscribe to Newsletter:</label>
+        <input type="checkbox" id="subscribe" name="subscribe" value="yes"><br>
+
+        <label for="comments">Comments:</label>
+        <textarea id="comments" name="comments" rows="2" cols="50" placeholder="Leave us your comments here..."></textarea><br><br>
+        
+        <label for=""file">Upload your File:</label>
+        <input type="file" id="file" name="file" accept=".jpg, .jpeg, .png, .pdf"><br><br>
+        
+        <input type="submit" value="Submit">
+        <input type="reset" value="reset">
+     </form>
+</body>
+</html>
+
+<style>
+.product-list {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  padding: 24px 0;
+  margin-top: 40px; /* Add space below header */
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.product-card {
+  width: 300px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background: #fff;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+  padding: 12px;
+  text-align: center;
+}
+.product-card img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 6px;
+}
+.product-title {
+  font-size: 1.1em;
+  margin: 10px 0 6px 0;
+  font-weight: bold;
+}
+.product-desc {
+  font-size: 0.95em;
+  color: #555;
+  margin-bottom: 8px;
+}
+.product-price {
+  font-size: 1.1em;
+  color: #007bff;
+  font-weight: bold;
+  margin-bottom: 8px;
+}
+
+.contact-buttons {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+}
+.contact-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  border: none;
+  border-radius: 50%;
+  background: #eee;
+  font-size: 20px;
+  text-decoration: none;
+  color: #333;
+  transition: background 0.2s;
+}
+.contact-btn:hover {
+  background: #ccc;
+}
+</style>
+
+<div class="product-list">
+  <div class="product-card">
+    <img src="tsion.jpg" alt="Product 1">
+    <div class="product-title">tsiom konjo</div>
+    <div class="product-desc">happiness promax .</div>
+    <div class="product-price">ETB5,000,000,000,000</div>
+  </div>
+  <div class="product-card">
+    <img src="images (2).jpeg" alt="Product 2">
+    <div class="product-title">Smart Watch</div>
+    <div class="product-desc">Fitness tracking, heart rate monitor, waterproof design.</div>
+    <div class="product-price">ETB89.99</div>
+  </div>
+  <div class="product-card">
+    <img src="speaker.jpg" alt="Product 3">
+    <div class="product-title">Bluetooth Speaker</div>
+    <div class="product-desc">Portable, deep bass, 12h playtime, multiple colors.</div>
+    <div class="product-price">ETB34.99</div>
+  </div>
+  <div class="product-card">
+    <img src="images (3).jpeg" alt="Product 4">
+    <div class="product-title">Running Shoes</div>
+    <div class="product-desc">Lightweight, breathable, perfect for daily workouts.</div>
+    <div class="product-price">ETB49.99</div>
+  </div>
+  <div class="product-card">
+    <img src="images (4).jpeg" alt="Product 5">
+    <div class="product-title">Laptop Backpack</div>
+    <div class="product-desc">Water-resistant, fits 15" laptop, USB charging port.</div>
+    <div class="product-price">ETB39.99</div>
+  </div>
+</div>
+
+<footer style="text-align: center; background: #222; padding: 20px 0;">
+  <div class="contact-buttons">
+    <a href="tel:+25 1901254400" class="contact-btn" title="Phone">📞</a>
+    <a href="mailto:kalebmarkos1@gmail.com" class="contact-btn" title="Email">✉️</a>
+    <a href="https://x.com/yourprofile" class="contact-btn" title="X (Twitter)" target="_blank">𝕏</a>
+    <a href="https://instagram.com/alphamann2025" class="contact-btn" title="Instagram" target="_blank">📸</a>
+  </div>
+  <p style="color: white; margin-top: 10px;">&copy; 2025 iMart.com All rights
