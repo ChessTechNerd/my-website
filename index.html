@@ -206,13 +206,14 @@ button[type="submit"]:hover {
 @media (max-width: 700px) {
   .product-list {
     grid-template-columns: repeat(2, 1fr);
-    gap: 24px 10px;
-    padding: 8px 2px;
+    gap: 32px 18px;           /* More space between cards */
+    padding: 18px 8px 18px 8px; /* More padding on sides and top/bottom */
   }
   .product-card {
-    width: 100%;
-    max-width: 98vw;
+    width: 95%;
+    max-width: 220px;
     margin: 0 auto;
+    padding: 12px 6px 18px 6px; /* Add inner padding for breathing room */
   }
   .header {
     flex-direction: column;
