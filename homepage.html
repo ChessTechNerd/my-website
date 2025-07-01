@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Welcome | Chela Books Store</title>
+  <link rel="icon" type="image/jpg" href="reallogo.png">
+  <style>
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background: linear-gradient(135deg, #7e83d6 0%, #007bff 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Segoe UI', Arial, sans-serif;
+      color: #fff;
+      overflow: hidden;
+    }
+    .welcome-container {
+      background: rgba(255,255,255,0.10);
+      border-radius: 24px;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.18);
+      padding: 48px 32px 40px 32px;
+      max-width: 420px;
+      width: 95vw;
+      text-align: center;
+      position: relative;
+      z-index: 2;
+      animation: fadeIn 1.2s cubic-bezier(.4,0,.2,1);
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(40px);}
+      to { opacity: 1; transform: none;}
+    }
+    .logo {
+      width: 80px;
+      height: 80px;
+      object-fit: contain;
+      border-radius: 16px;
+      margin-bottom: 18px;
+      box-shadow: 0 2px 12px #0002;
+      background: #fff;
+      display: inline-block;
+    }
+    .animated-text {
+      font-size: 2em;
+      font-weight: bold;
+      margin-bottom: 10px;
+      background: linear-gradient(90deg, #ffe259, #ffa751, #7e83d6, #007bff, #ffe259);
+      background-size: 300% 300%;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: gradient-move 4s linear infinite alternate;
+      letter-spacing: 1.5px;
+      display: inline-block;
+    }
+    @keyframes gradient-move {
+      0% { background-position: 0% 50%;}
+      100% { background-position: 100% 50%;}
+    }
+    .subtitle {
+      font-size: 1.1em;
+      margin-bottom: 28px;
+      color: #f8f8f8;
+      font-weight: 500;
+      letter-spacing: 0.5px;
+      line-height: 1.6;
+      text-shadow: 0 2px 8px #0002;
+    }
+    .get-started-btn {
+      background: linear-gradient(90deg, #007bff 60%, #ffe259 100%);
+      color: #222;
+      border: none;
+      border-radius: 30px;
+      padding: 16px 48px;
+      font-size: 1.2em;
+      font-weight: bold;
+      cursor: pointer;
+      box-shadow: 0 4px 24px rgba(0,123,255,0.10);
+      transition: background 0.2s, color 0.2s, transform 0.15s;
+      margin-top: 16px;
+      outline: none;
+      position: relative;
+      overflow: hidden;
+    }
+    .get-started-btn:hover, .get-started-btn:focus {
+      background: linear-gradient(90deg, #ffe259 0%, #007bff 100%);
+      color: #007bff;
+      transform: translateY(-2px) scale(1.04);
+    }
+    .flag {
+      font-size: 1.5em;
+      vertical-align: middle;
+      margin-left: 6px;
+    }
+    /* Responsive */
+    @media (max-width: 600px) {
+      .welcome-container {
+        padding: 32px 8vw 28px 8vw;
+      }
+      .animated-text {
+        font-size: 1.3em;
+      }
+      .logo {
+        width: 60px;
+        height: 60px;
+      }
+    }
+    /* Animated background circles */
+    .circle-bg {
+      position: absolute;
+      border-radius: 50%;
+      opacity: 0.18;
+      z-index: 0;
+      animation: float 12s ease-in-out infinite alternate;
+    }
+    .circle1 { width: 320px; height: 320px; background: #ffe259; left: -120px; top: -80px; animation-delay: 0s;}
+    .circle2 { width: 180px; height: 180px; background: #007bff; right: -60px; bottom: -60px; animation-delay: 2s;}
+    .circle3 { width: 90px; height: 90px; background: #ffa751; left: 60%; top: 60px; animation-delay: 4s;}
+    @keyframes float {
+      0% { transform: translateY(0);}
+      100% { transform: translateY(40px);}
+    }
+  </style>
+</head>
+<body>
+  <div class="circle-bg circle1"></div>
+  <div class="circle-bg circle2"></div>
+  <div class="circle-bg circle3"></div>
+  <div class="welcome-container">
+    <img src="logi.png" alt="Chela Books Logo" class="logo">
+    <div class="animated-text">
+      Welcome to Chela Books Store <span class="flag" title="Ethiopia">🇪🇹</span>
+    </div>
+    <div class="subtitle" id="subtitle-typing"></div>
+    <button class="get-started-btn" onclick="window.location.href='index.html'">Get Started</button>
+  </div>
+  <script>
+    // Animated typing effect for subtitle
+    const messages = [
+      "Ethiopia's #1 Online Bookstore.",
+      "Curated books delivered to your door.",
+      "Empowering minds through knowledge.",
+      "Start your reading journey today!"
+    ];
+    let msgIdx = 0, charIdx = 0, typing = true;
+    const subtitle = document.getElementById('subtitle-typing');
+    function typeLoop() {
+      if (typing) {
+        if (charIdx < messages[msgIdx].length) {
+          subtitle.textContent += messages[msgIdx][charIdx++];
+          setTimeout(typeLoop, 38);
+        } else {
+          typing = false;
+          setTimeout(typeLoop, 1200);
+        }
+      } else {
+        if (charIdx > 0) {
+          subtitle.textContent = messages[msgIdx].slice(0, --charIdx);
+          setTimeout(typeLoop, 18);
+        } else {
+          typing = true;
+          msgIdx = (msgIdx + 1) % messages.length;
+          setTimeout(typeLoop, 400);
+        }
+      }
+    }
+    typeLoop();
+  </script>
+</body>
