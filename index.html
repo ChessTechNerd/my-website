@@ -1,170 +1,285 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Welcome | Chela Books Store</title>
-  <link rel="icon" type="image/jpg" href="reallogo.png">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ethio-Procurementor</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
   <style>
-    body {
+    * {
       margin: 0;
-      min-height: 100vh;
-      background: linear-gradient(135deg, #7e83d6 0%, #007bff 100%);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-family: 'Segoe UI', Arial, sans-serif;
-      color: #fff;
-      overflow: hidden;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Inter', sans-serif;
     }
-    .welcome-container {
-      background: rgba(255,255,255,0.10);
-      border-radius: 24px;
-      box-shadow: 0 8px 32px rgba(0,0,0,0.18);
-      padding: 48px 32px 40px 32px;
-      max-width: 420px;
-      width: 95vw;
-      text-align: center;
-      position: relative;
-      z-index: 2;
-      animation: fadeIn 1.2s cubic-bezier(.4,0,.2,1);
-    }
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(40px);}
-      to { opacity: 1; transform: none;}
-    }
-    .logo {
-      width: 80px;
-      height: 80px;
-      object-fit: contain;
-      border-radius: 16px;
-      margin-bottom: 18px;
-      box-shadow: 0 2px 12px #0002;
-      background: #fff;
-      display: inline-block;
-    }
-    .animated-text {
-      font-size: 2em;
-      font-weight: bold;
-      margin-bottom: 10px;
-      background: linear-gradient(90deg, #ffe259, #ffa751, #7e83d6, #007bff, #ffe259);
-      background-size: 300% 300%;
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      animation: gradient-move 4s linear infinite alternate;
-      letter-spacing: 1.5px;
-      display: inline-block;
-    }
-    @keyframes gradient-move {
-      0% { background-position: 0% 50%;}
-      100% { background-position: 100% 50%;}
-    }
-    .subtitle {
-      font-size: 1.1em;
-      margin-bottom: 28px;
-      color: #f8f8f8;
-      font-weight: 500;
-      letter-spacing: 0.5px;
+
+    body {
+      background-color: #ffffff;
+      color: #333;
       line-height: 1.6;
-      text-shadow: 0 2px 8px #0002;
     }
-    .get-started-btn {
-      background: linear-gradient(90deg, #007bff 60%, #ffe259 100%);
-      color: #222;
+
+    header {
+      background: url('https://images.unsplash.com/photo-1556761175-4b46a572b786?fit=crop&w=1500') no-repeat center center/cover;
+      color: white;
+      text-align: center;
+      padding: 100px 20px;
+    }
+     .header-box {
+      display: inline-block;
+      background-color: rgba(51, 51, 56, 0.85);
+      padding: 15px 25px;
+      border-radius: 10px;
+    }
+
+    header h1 {
+      font-size: 2.8rem;
+      margin-bottom: 10px;
+    }
+    @media (max-width: 768px) {
+  header h1 {
+    font-size: 2.5rem;
+    white-space: nowrap;      /* Prevent it from breaking into 2 lines */
+    overflow: hidden;         /* Optional: hides anything that overflows */
+    text-overflow: ellipsis;  /* Optional: adds ... if it overflows */
+  }
+}
+
+
+    header p {
+      font-size: 1.2rem;
+      margin-bottom: 20px;
+    }
+
+    .btn-primary {
+      background-color: #0066cc;
+      color: white;
+      padding: 12px 25px;
       border: none;
-      border-radius: 30px;
-      padding: 16px 48px;
-      font-size: 1.2em;
-      font-weight: bold;
+      border-radius: 5px;
       cursor: pointer;
-      box-shadow: 0 4px 24px rgba(0,123,255,0.10);
-      transition: background 0.2s, color 0.2s, transform 0.15s;
-      margin-top: 16px;
-      outline: none;
-      position: relative;
-      overflow: hidden;
+      text-decoration: none;
+      font-weight: 600;
     }
-    .get-started-btn:hover, .get-started-btn:focus {
-      background: linear-gradient(90deg, #ffe259 0%, #007bff 100%);
-      color: #007bff;
-      transform: translateY(-2px) scale(1.04);
+
+    section {
+      padding: 60px 20px;
+      max-width: 1100px;
+      margin: 0 auto;
     }
-    .flag {
-      font-size: 1.5em;
-      vertical-align: middle;
-      margin-left: 6px;
+
+    .services, .why-choose-us {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 30px;
     }
-    /* Responsive */
-    @media (max-width: 600px) {
-      .welcome-container {
-        padding: 32px 8vw 28px 8vw;
-      }
-      .animated-text {
-        font-size: 1.3em;
-      }
-      .logo {
-        width: 60px;
-        height: 60px;
-      }
+
+    .card {
+      background: #f7f9fc;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
     }
-    /* Animated background circles */
-    .circle-bg {
-      position: absolute;
-      border-radius: 50%;
-      opacity: 0.18;
-      z-index: 0;
-      animation: float 12s ease-in-out infinite alternate;
+
+    .card h3 {
+      margin-bottom: 10px;
+      color: #0066cc;
     }
-    .circle1 { width: 320px; height: 320px; background: #ffe259; left: -120px; top: -80px; animation-delay: 0s;}
-    .circle2 { width: 180px; height: 180px; background: #007bff; right: -60px; bottom: -60px; animation-delay: 2s;}
-    .circle3 { width: 90px; height: 90px; background: #ffa751; left: 60%; top: 60px; animation-delay: 4s;}
-    @keyframes float {
-      0% { transform: translateY(0);}
-      100% { transform: translateY(40px);}
+
+    .quote {
+      background-color: #e6f0ff;
+      padding: 40px;
+      border-left: 5px solid #0066cc;
+      font-size: 1.2rem;
+      font-style: italic;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+
+    input, textarea {
+      padding: 12px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      font-size: 1rem;
+    }
+
+    .contact-buttons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 24px; /* Adjust spacing between icons */
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+
+.contact-btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 50px;  /* Size of the icon container */
+  height: 50px;
+  border-radius: 50%;
+  transition: transform 0.2s ease;
+  text-decoration: none;
+}
+
+.contact-btn:hover {
+  transform: scale(1.1);
+}
+
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      background: #f0f0f0;
+      color: #666;
+    }
+
+    footer a {
+      margin: 0 10px;
+      color: #0066cc;
+      text-decoration: none;
     }
   </style>
 </head>
+
 <body>
-  <div class="circle-bg circle1"></div>
-  <div class="circle-bg circle2"></div>
-  <div class="circle-bg circle3"></div>
-  <div class="welcome-container">
-    <img src="logi.png" alt="Chela Books Logo" class="logo">
-    <div class="animated-text">
-      Welcome to Chela Books Store <span class="flag" title="Ethiopia">🇪🇹</span>
-    </div>
-    <div class="subtitle" id="subtitle-typing"></div>
-    <button class="get-started-btn" onclick="window.location.href='homepagee.html'">Get Started</button>
+  <!-- Hero Section -->
+  <header>
+    
+  <div class="logo-container">
+    <img src="prologo.png" alt="Ethio-Procurementor Logo" class="logo" />
   </div>
-  <script>
-    // Animated typing effect for subtitle
-    const messages = [
-      "Ethiopia's #1 Online Bookstore.",
-      "Curated books delivered to your door.",
-      "Empowering minds through knowledge.",
-      "Start your reading journey today!"
-    ];
-    let msgIdx = 0, charIdx = 0, typing = true;
-    const subtitle = document.getElementById('subtitle-typing');
-    function typeLoop() {
-      if (typing) {
-        if (charIdx < messages[msgIdx].length) {
-          subtitle.textContent += messages[msgIdx][charIdx++];
-          setTimeout(typeLoop, 38);
-        } else {
-          typing = false;
-          setTimeout(typeLoop, 1200);
-        }
-      } else {
-        if (charIdx > 0) {
-          subtitle.textContent = messages[msgIdx].slice(0, --charIdx);
-          setTimeout(typeLoop, 18);
-        } else {
-          typing = true;
-          msgIdx = (msgIdx + 1) % messages.length;
-          setTimeout(typeLoop, 400);
-        }
-      }
-    }
-    typeLoop();
-  </script>
+  
+
+    <div class="header-box">
+      <h1>
+        <span style="color: rgba(2, 155, 2, 0.71);">Ethio-  </span>
+        <span style="color: rgb(255, 255, 0);"> Procure </span>
+         <span style="color: red;"> mentor </span>
+      </h1>
+    <p style="color: rgb(201, 242, 20); font-weight: bold;">Empowering organizations and professionals to master world-class procurement.</p>
+    <a href="#contact" class="btn-primary">Book a Free Discovery Call</a>
+     </div>
+  </header>
+
+  <!-- About Section -->
+  <section>
+    <h2>About Us</h2>
+    <p>At Ethio-Procurementor, we empower organizations and professionals to master best-in-class procurement and supply chain management. We serve as trusted partners for corporations and individuals striving for excellence in procurement, supplier management, contract negotiations, cost optimization, compliance, and digital procurement transformation.</p>
+  </section>
+
+  <!-- Core Services Section -->
+  <section>
+    <h2>Our Core Services</h2>
+    <div class="services">
+      <div class="card"><h3>System Reviews & Audits</h3></div>
+      <div class="card"><h3>Policy & Strategy Development</h3></div>
+      <div class="card"><h3>preparation of Tender Docs (RFPs, RFQs)</h3></div>
+      <div class="card"><h3>Contract Drafting & Agreement Structuring</h3></div>
+      <div class="card"><h3>Bid Project Development & Management</h3></div>
+      <div class="card"><h3>Procurement Manuals & SOPs Development</h3></div>
+      <div class="card"><h3>Procurement Digitization & System Design</h3></div>
+      <div class="card"><h3>Negotiation & Contract Management</h3></div>
+      <div class="card"><h3>Procurement Fundamentals & Compliance</h3></div>
+      <div class="card"><h3>Advanced Tender Management & Bid Evaluation</h3></div>
+      <div class="card"><h3>Custom OrganizationalTraining (online & in-person)</h3></div>
+      <div class="card"><h3>Cost Saving Initiatives Through Spend Analysis</h3></div>
+      <div class="card"><h3>Strategic Sourcing & Vendor Optimization</h3></div>
+      <div class="card"><h3>Inventory & Warehouse Management Systems</h3></div>
+      <div class="card"><h3>Project & Contract Management for Procurement Related Programs</h3></div>
+      <div class="card"><h3>Framework Agreement Structuring & Implementation</h3></div>
+    </div>
+  </section>
+
+  <!-- Why Choose Us Section -->
+  <section>
+    <h2>Why Choose Us</h2>
+    <div class="why-choose-us">
+      <div class="card">
+        <h3>Expert Team</h3>
+        <p>Decades of local and international procurement leadership with hands-on experience across multiple sectors.</p>
+      </div>
+      <div class="card">
+        <h3>Results-Driven</h3>
+        <p>we deliver measurable outcomes in cost savings, risk mitigation regulatory compliance, and operational efficiency.</p>
+      </div>
+      <div class="card">
+        <h3>Learning-Focused</h3>
+        <p>Access to modern procurement tools, mentorship, and certifications to keep your team aligned with global standards and innovations.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Vision Section -->
+  <section>
+    <div class="quote">
+      “To elevate procurement as a respected, strategic function within every organization—and to support the next generation of procurement professionals to succeed with confidence, capability, and integrity.”
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section id="contact">
+    <h2>Schedule a Call</h2>
+    <form id="contactForm">
+  <input type="text" placeholder="Your Full Name" required />
+  <input type="email" placeholder="Your Email" required />
+  <input type="tel" placeholder="Your Phone (0912345678)" required minlength="10" maxlength="10"/>
+  <textarea rows="5" placeholder="Your Message" required></textarea>
+  <button class="btn-primary" type="submit">Send Message</button>
+</form>
+
+<!-- Add this below the form -->
+<p id="success-message" style="display: none; color: green; margin-top: 10px;">
+  ✅ Your message was submitted successfully. We will get back to you soon.
+</p>
+
+    <p>Email: contact@ethio-procurementor.com</p>
+    <p>Phone: +251-937-888-123</p>
+    
+    <div class="contact-buttons">
+   <a href="https://wa.me/251937888123" class="contact-btn" title="WhatsApp" target="_blank" style="padding: 0;">
+  <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" viewBox="0 0 32 32">
+    <path fill="#25D366" d="M16.002.003C7.165.003.003 7.166.003 16c0 2.818.736 5.468 2.021 7.765L.023 32l8.383-2.209A15.942 15.942 0 0 0 16 31.997c8.837 0 16-7.163 16-15.997 0-8.838-7.163-15.997-15.998-15.997zm0 29.508a13.12 13.12 0 0 1-6.65-1.79l-.477-.282-4.975 1.312 1.327-4.853-.311-.5a13.057 13.057 0 1 1 11.086 6.113zm7.228-9.872c-.395-.197-2.334-1.152-2.697-1.28-.362-.133-.627-.198-.893.198s-1.02 1.28-1.25 1.544c-.228.265-.457.298-.851.1-.396-.198-1.671-.616-3.183-1.967-1.176-1.05-1.97-2.35-2.201-2.746-.229-.396-.025-.646.173-.844.177-.177.395-.458.592-.687.198-.228.264-.394.395-.657.132-.263.066-.495-.033-.692-.1-.198-.892-2.14-1.232-2.923-.325-.753-.66-.65-.909-.662l-.777-.012a1.504 1.504 0 0 0-1.089.509c-.376.396-1.426 1.39-1.426 3.387 0 1.996 1.46 3.924 1.663 4.192.198.263 2.884 4.401 6.981 6.17 3.258 1.402 4.54 1.518 6.184 1.282 1.026-.153 2.334-.954 2.664-1.874.33-.92.33-1.709.23-1.874-.099-.165-.363-.263-.759-.46z"/>
+  </svg>
+</a>
+
+
+
+
+    
+    <a href="https://t.me/tsimark" class="contact-btn" title="Telegram" target="_blank" style="padding:1000;">
+  <svg width="35" height="35" viewBox="0 0 240 240" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="120" cy="120" r="120" fill="#37AEE2"/>
+    <path d="M180.5 72.5L157.5 179.5C155.5 187.5 150.5 189.5 143.5 185.5L110.5 160.5L94.5 175.5C92.5 177.5 90.5 179.5 87.5 179.5L90.5 144.5L157.5 84.5C160.5 81.5 157.5 80.5 153.5 83.5L75.5 134.5L41.5 123.5C34.5 121.5 34.5 116.5 43.5 113.5L172.5 68.5C178.5 66.5 183.5 70.5 180.5 72.5Z" fill="white"/>
+  </svg>
+</a>
+
+<a href="https://www.linkedin.com/in/tsion-markos-2bb80b230?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app
+
+" class="contact-btn" title="LinkedIn" target="_blank" style="padding:0;">
+  <svg width="30" height="35" viewBox="0 0 34 34" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <rect width="34" height="34" rx="4" fill="#0077B5"/>
+    <path d="M10.268 12.469H6.837V27h3.431v-14.531zM8.553 10.831c1.099 0 1.983-.896 1.983-2.001a1.991 1.991 0 00-1.983-2.003c-1.096 0-1.984.897-1.984 2.003 0 1.105.888 2.001 1.984 2.001zm6.848 1.638h-3.43V27h3.43v-7.737c0-4.368 5.718-4.725 5.718 0V27h3.43v-8.787c0-7.05-8.129-6.806-9.148-3.326v-2.78z" fill="white"/>
+  </svg>
+</a>
+
+  </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2025 Ethio-Procurementor. All rights reserved.</p>
+    <a href="#">Terms</a> |
+    <a href="#">Privacy</a>
+  </footer>
+  <script src="script.js"></script>
+
 </body>
+
+</html>
